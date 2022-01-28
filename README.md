@@ -54,6 +54,18 @@ Your finished project must include all of the following requirements (further in
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics.
 
 1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
+   <br/><br/>
+   A)Session cookies are used to authenticate users based on their current session. The logged-in status of a user is saved in the server's memory, and the session expires after the time limit has been reached. JWTs are popular because they scale better than session cookies because tokens are saved on the client side whereas the session needs server Memory to store user data, which can be a problem when a large number of users visit the application at the same time.
+   <br/><br/>
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
+   <br/><br/>
+   A)It uses salting both manually and automatically by accumulating hashing rounds when hashing a password. It will not keep our plain text password, but rather an encrypted password hashed at the developer's specified round. An attacker must have the hash, know the algorithm employed, and how many rounds were required to obtain the hash in the first place if the algorithm hashes the information several times, and rounds the set number.
+   <br/><br/>
 3. How are unit tests different from integration and end-to-end testing?
+   <br/><br/>
+   A)When performing E2E (end-to-end) tests, the complete application, both front and back, will be performed, and your test will interact with the app as if it were a real user. Integration testing examines the application's connectivity and communication among its many components. Unit testing is when you test a small isolated unit.
+   <br/><br/>
 4. How does _Test Driven Development_ change the way we write applications and tests?
+   <br/><br/>
+   A)One of the main advantages of test-driven development is that it forces developers to concentrate on requirements before writing code. This is in contrast to the standard practice of writing unit tests after the code has been written. This demonstrates that new code is required for the requested feature.
+   <br/><br/>
