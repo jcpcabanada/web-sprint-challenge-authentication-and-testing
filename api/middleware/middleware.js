@@ -40,7 +40,7 @@ const checkLogin = async (req, res, next) => {
             next()
         } else {
             next({
-                status:404,
+                status:401,
                 message: 'invalid credentials'
             })
         }
