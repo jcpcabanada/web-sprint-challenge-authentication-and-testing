@@ -22,8 +22,8 @@ const makeToken = user => {
 };
 
 
-router.post('/register', checkInput, availableUsername, (req, res, next) => {
-    const {username, password} = req.body
+router.post('/register', checkLogin, availableUsername, (req, res, next) => {
+    let {username, password} = req.body
     const hash = bcrypt.hashSync(password, 8)
 
     Auth.addUser({username, password: hash})
@@ -34,8 +34,8 @@ router.post('/register', checkInput, availableUsername, (req, res, next) => {
 
 });
 
-router.post('/login', checkInput, checkLogin,(req, res, next) => {
-    const { password } = req.body;
+router.post('/login', checkLogin, checkInput, (req, res, next) => {
+    let { password } = req.body;
     if(bcrypt.compareSync(password, req.user.password)) {
         const token = makeToken(req.user)
         res.json({

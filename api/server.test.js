@@ -24,9 +24,9 @@ afterAll(async () => {
 })
 
 describe('GET /jokes', () => {
-    test('Returns error code 403', async () => {
+    test('Returns error code 401', async () => {
         const res = await request(server).get('/api/jokes')
-        expect(res.status).toBe(403)
+        expect(res.status).toBe(401)
     })
     test('Returns error message', async () => {
         const res = await request(server).get('/api/jokes')

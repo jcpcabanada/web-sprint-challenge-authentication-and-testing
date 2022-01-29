@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     const token = req.headers.authorization
     if (!token) {
         next({
-            status: 403,
+            status: 401,
             message: 'Token Required'
         })
     } else {

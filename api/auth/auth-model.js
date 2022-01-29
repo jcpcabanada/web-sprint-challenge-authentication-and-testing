@@ -6,6 +6,9 @@ const addUser = async user => {
         .where({id})
         .first()
 };
+function findBy(filter) {
+    return db('users').where(filter)
+}
 
 const getById = id => {
     return db('users')
@@ -21,4 +24,5 @@ module.exports = {
     addUser,
     getById,
     getAll,
+    findBy,
 };

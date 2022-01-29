@@ -1,51 +1,50 @@
 const db = require('../../data/dbConfig')
+const Auth = require('../auth/auth-model')
 
-const checkInput = (req, res, next) => {
-    const {username, password} = req.body;
-    if (!username || !password) {
+const availableUsername = async (req, res, next) => {
+    const { username } = req.body
+    try {
+        const users = await Auth.findBy({ username })
+        if (users.length) {
+            next({
+                status: 401,
+                message: "Username taken"
+            })
+        } else {
+            next()
+        }
+    } catch (err) {
+        next(err)
+    }
+}
+
+const checkInput = async (req, res, next) => {
+    try {
+        const username = await db('users').where('username', req.body.username).first()
+        if (username) {
+            req.user = username
+            next()
+        } else {
+            next({
+                status: 401,
+                message: 'invalid credentials'
+            })
+        }
+    } catch (err) {
+        next(err)
+    }
+}
+
+
+const checkLogin = async (req, res, next) => {
+    const { username, password } = req.body
+    if(!username || !password) {
         next({
             status: 401,
             message: 'username and password required'
         })
     } else {
         next()
-    }
-}
-
-const availableUsername = async (req, res, next) => {
-    const {username} = req.body;
-    try {
-        const user = await db('users')
-            .where({ username })
-            .first()
-        if(user) {
-            next({
-                status:401,
-                message: 'username taken'
-            })
-        }
-    } catch (e) {
-        next(e)
-    }
-}
-
-const checkLogin = async (req, res, next) => {
-    const {username} = req.body;
-    try {
-        const user = await db('users')
-            .where({username})
-            .first()
-        if(user) {
-            req.user = user;
-            next()
-        } else {
-            next({
-                status:401,
-                message: 'invalid credentials'
-            })
-        }
-    } catch (e) {
-        next(e)
     }
 }
 
